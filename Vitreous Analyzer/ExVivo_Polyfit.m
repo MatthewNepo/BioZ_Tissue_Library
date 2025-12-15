@@ -1,0 +1,31 @@
+function [Substance_max_line,Substance_min_line,Substance_50_line,Substance_100_line,Substance_500_line,Substance_900_line] = ExVivo_Polyfit(Substance,Age_Titles,ages)
+    Substance_x_line = Age_Titles;
+    Ages = zeros(1,3*length(ages));
+    for i = 1:length(ages)
+        Ages(3*(i-1)+1) = ages(i);
+        Ages(3*(i-1)+2) = ages(i);
+        Ages(3*(i-1)+3) = ages(i);
+    end
+    Substance_max = [max(Substance)];
+    Substance_min = [min(Substance)];
+    % Substance_50 = [mean(Substance(11,:))];
+    % Substance_100 = [mean(Substance(21,:))];
+    % Substance_500 = [mean(Substance(101,:))];
+    % Substance_900 = [mean(Substance(181,:))];
+    Substance_50 = [Substance(11,:)];
+    Substance_100 = [Substance(21,:)];
+    Substance_500 = [Substance(101,:)];
+    Substance_900 = [Substance(181,:)];
+    Substance_max_fit = polyfit(Ages,Substance_max,3);
+    Substance_min_fit = polyfit(Ages,Substance_min,3);
+    Substance_50_fit = polyfit(Ages,Substance_50,3);
+    Substance_100_fit = polyfit(Ages,Substance_100,3);
+    Substance_500_fit = polyfit(Ages,Substance_500,3);
+    Substance_900_fit = polyfit(Ages,Substance_900,3);
+    Substance_max_line = Substance_max_fit(4)+(Substance_max_fit(3)*Substance_x_line)+(Substance_max_fit(2)*(Substance_x_line.^2))+(Substance_max_fit(1)*(Substance_x_line.^3));
+    Substance_min_line = Substance_min_fit(4)+(Substance_min_fit(3)*Substance_x_line)+(Substance_min_fit(2)*(Substance_x_line.^2))+(Substance_min_fit(1)*(Substance_x_line.^3));
+    Substance_50_line = Substance_50_fit(4)+(Substance_50_fit(3)*Substance_x_line)+(Substance_50_fit(2)*(Substance_x_line.^2))+(Substance_50_fit(1)*(Substance_x_line.^3));
+    Substance_100_line = Substance_100_fit(4)+(Substance_100_fit(3)*Substance_x_line)+(Substance_100_fit(2)*(Substance_x_line.^2))+(Substance_100_fit(1)*(Substance_x_line.^3));
+    Substance_500_line = Substance_500_fit(4)+(Substance_500_fit(3)*Substance_x_line)+(Substance_500_fit(2)*(Substance_x_line.^2))+(Substance_500_fit(1)*(Substance_x_line.^3));
+    Substance_900_line = Substance_900_fit(4)+(Substance_900_fit(3)*Substance_x_line)+(Substance_900_fit(2)*(Substance_x_line.^2))+(Substance_900_fit(1)*(Substance_x_line.^3));
+end
